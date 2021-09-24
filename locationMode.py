@@ -26,7 +26,7 @@ def locationstate(cX, cY):
         elif cY < 215:
             print("MOVE DOWN")
         else:
-            print("MOVE LEFT")
+            print("MOVE RIGHT")
     else:
         if cY > 265:
             print("MOVE UP")
