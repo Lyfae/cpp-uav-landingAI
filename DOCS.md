@@ -8,9 +8,13 @@ This markdown file contains daily updates on progress that is made during a work
 - [x] Basic camera OpenCV setup
 
 ### September 23, 2021
-- [] Make sure the AruCo Codes Works
-- [] Get everything calibrated accordingly to flow chart A
-- [] ??? 
+- [x] Make sure the AruCo Codes Works
+- [x] Get everything calibrated accordingly to flow chart A
+
+### September 24, 2021 
+- [x] Made a rough draft code of the orientation code for the drone
+- [x] Separated the states into different files for easy debugging and organization
+- [x] Start implementing the next stages 
 
 
 

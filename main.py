@@ -7,7 +7,9 @@ import time
 from _thread import *
 import threading
 
-from arucodetect import *
+#from arucodetect import *
+from locationMode import *
+from orientationMode import *
 
 def main():
     # Define webcam used
@@ -28,8 +30,10 @@ def main():
     # State 0: Flying Mode
     # State 1: Location Mode
     # State 2: Orientation Mode
-    # State 3: Landing Mode
-    # State 4: Takeoff Mode
+    # State 3: Docking Mode
+    # State 4: Landing Mode
+    # State 5: Takeoff Mode
+    
 
     while(True):
         # Grabbing frame from webcam
@@ -47,18 +51,22 @@ def main():
         if state == 1:
             state = locationstate(cX, cY)
 
-        # Orientation Logic
+        #Orientation Logic
         if state == 2:
             corners, ids =  findArucoMarkers(frame, 5, 50)
             try:
                 state, coordinates = cornerloc(frame, corners, ids)
-                print(coordinates)
-                state = 2
+                #print(coordinates)
+                #Rotation Logic
+                rotation(coordinates)                
             except:
                 pass
-
+        # Docking Logic             
         if state == 3:
             print("LANDING MODE!!!")
+
+        
+
 
         # Show frame in seperate box
         cv2.imshow('video', frame)
