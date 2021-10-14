@@ -91,19 +91,19 @@ def cornerloc(frame, corners, ids):
         coordinates[int(markerID)] = [cX, cY]
     return 2, coordinates # Change back to 3 later
 
-#find only id0 from the corners
-def rotation(coordinates):
-    xH = coordinates[0][0]
-    xV = coordinates[0][1]
+# #find only id0 from the corners
+# def rotation(coordinates):
+#     xH = coordinates[0][0]
+#     xV = coordinates[0][1]
     
-    if(xH < 518):
-        print("rotate left")
-        if(xH > 610):
-            print("rotate right")
-    elif(xV < 400):
-        print("rotate right")
-        if(xV > 460):
-            print("rotate left")
-    else:
-        print("Drone is in position")
+#     if(xH < 518):
+#         print("rotate left")
+#         if(xH > 610):
+#             print("rotate right")
+#     elif(xV < 400):
+#         print("rotate right")
+#         if(xV > 460):
+#             print("rotate left")
+#     else:
+#         print("Drone is in position")
     

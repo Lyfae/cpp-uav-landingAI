@@ -72,7 +72,7 @@ def tkinter():
     title = tk.Label(main_canvas,text="Robotics Team Super Duper Swag Controller!", font = ('impact',28,'bold italic'), justify='center', bg = BGCOLOR, fg=TITLECOLOR)
     title.place(relx = 0.5, rely=0.075, anchor='center')
 
-    location_title = tk.Label(location_canvas, text="Location Search", font=('arial',24,'bold'), justify='center', bg=BGCOLOR, fg=TITLECOLOR,)
+    location_title = tk.Label(location_canvas, text="Location", font=('arial',24,'bold'), justify='center', bg=BGCOLOR, fg=TITLECOLOR,)
     location_title.place(relx = 0.5,rely = 0.08,anchor='center')
 
     orientation_title = tk.Label(orientation_canvas, text="Orientation", font=('arial',24,'bold'), justify='center', bg=BGCOLOR, fg=TITLECOLOR,)

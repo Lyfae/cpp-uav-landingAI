@@ -48,24 +48,35 @@ def main():
                 pass # Skip process if ArUcO code is not found
             
         # Centering Logic
+        # Quadrant Logic
         if state == 1:
-            state = locationstate(cX, cY)
+            state,c0,c1 = locationstate(cX, cY)
 
-        #Orientation Logic
+        #Orientation Logicc
         if state == 2:
             corners, ids =  findArucoMarkers(frame, 5, 50)
             try:
-                state, coordinates = cornerloc(frame, corners, ids)
+                coordinates = cornerloc(frame, corners, ids)
                 #print(coordinates)
                 #Rotation Logic
-                rotation(coordinates)                
+                state = quadrant_logic(coordinates,c0,c1)
+
+            
             except:
                 pass
-        # Docking Logic             
+        # Orientation Logic
+        # Differential Logic             
         if state == 3:
-            print("LANDING MODE!!!")
+            corners, ids =  findArucoMarkers(frame, 5, 50)
+            try:     
+                coordinates = cornerloc(frame, corners, ids)
+                state = differential(coordinates)
+            except:
+                pass                
 
-        
+        if state == 4:
+            print("You are done for now")
+            break
 
 
         # Show frame in seperate box

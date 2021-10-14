@@ -13,6 +13,11 @@ def findArucoMarkers(img, markerSize, totalMarkers, draw=True):
     return corners, ids
  
 def locationstate(cX, cY):
+    global temp1
+    global temp2
+    temp1=0
+    temp2=0
+
     if cX > 345:
         if cY > 265:
             print("MOVE UP")
@@ -35,8 +40,10 @@ def locationstate(cX, cY):
         else:
             print("DRONE IS IN THE RIGHT PLACE!!!!")
             print("BEGIN LOWERING STATE!!!!")
-            return 2
-    return 1
+            temp1 = cX
+            temp2 = cY
+            return 2,temp1, temp2
+    return 1,0,0
 
 def centerloc(frame, corners, ids):
     for (markerCorner, markerID) in zip(corners, ids):
