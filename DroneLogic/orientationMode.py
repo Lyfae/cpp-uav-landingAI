@@ -102,33 +102,36 @@ def differential(coordinates):
         return 4  
     return 3
 
-def quadrant_logic(coordinates,c0,c1):
+def quadrant_logic(coordinates,c0,c1,frame):
     global d1
     global d2
     global theta
     #check to see if id0 is in the correct quadrant
     id0_cordX = coordinates[0][0]
     id0_cordY = coordinates[0][1]
-
+    
 
     if id0_cordX <= 320 and id0_cordY <=240:
-        print("In Quadrant 1, rotate right")
+        print("In Quadrant 2, rotate right")
     elif id0_cordX > 320 and id0_cordY <=240:
-        print("In Quadrant 2, rotate left")
+        print("In Quadrant 1, rotate left")
     elif id0_cordX <=320 and id0_cordY > 240:
         print("In Quadrant 3, rotate right")
     else:
-        print("In correct postion, finding differentials")
+        #print("In correct postion, finding differentials")
         temp1,temp2 = id0_cordX,id0_cordY
         
         d1 = distance(c0,560,c1,360)
         print("D1",d1)
         d2 = distance(c0,temp1, c1,temp2)
         print("D2",d2)
-        theta = arcCos(d2,d1)
-
+        line = cv2.line(frame,(c0,c1),(560,360),(0,0,0),5)
+        line2 = cv2.line(frame,(c0,c1),(temp1,temp2),(0,0,0),5)
+        cv2.imshow('Test',line)
+        cv2.imshow('Test2',line2)
+        theta = arcCos(d1,d2)
         print("The value:",theta)
-        return 3
+        #return 3
     return 2    
 
 

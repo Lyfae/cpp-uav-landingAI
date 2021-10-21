@@ -59,20 +59,20 @@ def main():
                 coordinates = cornerloc(frame, corners, ids)
                 #print(coordinates)
                 #Rotation Logic
-                state = quadrant_logic(coordinates,c0,c1)
+                state = quadrant_logic(coordinates,c0,c1,frame)
 
             
             except:
                 pass
         # Orientation Logic
-        # Differential Logic             
-        if state == 3:
-            corners, ids =  findArucoMarkers(frame, 5, 50)
-            try:     
-                coordinates = cornerloc(frame, corners, ids)
-                state = differential(coordinates)
-            except:
-                pass                
+        # # Differential Logic             
+        # if state == 3:
+        #     corners, ids =  findArucoMarkers(frame, 5, 50)
+        #     try:     
+        #         coordinates = cornerloc(frame, corners, ids)
+        #         state = differential(coordinates)
+        #     except:
+        #         pass                
 
         if state == 4:
             print("You are done for now")
