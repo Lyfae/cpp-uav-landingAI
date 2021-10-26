@@ -10,6 +10,7 @@ import threading
 #from arucodetect import *
 from locationMode import *
 from orientationMode import *
+from precision import*
 
 def main():
     # Define webcam used
@@ -30,9 +31,8 @@ def main():
     # State 0: Flying Mode
     # State 1: Location Mode
     # State 2: Orientation Mode
-    # State 3: Docking Mode
-    # State 4: Landing Mode
-    # State 5: Takeoff Mode
+    # State 3: Precision Mode
+    # State 4: Landing and Battery mode 
     
 
     while(True):
@@ -52,7 +52,7 @@ def main():
         if state == 1:
             state,c0,c1 = locationstate(cX, cY)
 
-        #Orientation Logicc
+        # Orientation Logic
         if state == 2:
             corners, ids =  findArucoMarkers(frame, 5, 50)
             try:
@@ -60,20 +60,21 @@ def main():
                 #print(coordinates)
                 #Rotation Logic
                 state = quadrant_logic(coordinates,c0,c1,frame)
-
-            
             except:
                 pass
-        # Orientation Logic
-        # # Differential Logic             
-        # if state == 3:
-        #     corners, ids =  findArucoMarkers(frame, 5, 50)
-        #     try:     
-        #         coordinates = cornerloc(frame, corners, ids)
-        #         state = differential(coordinates)
-        #     except:
-        #         pass                
-
+        # Precision Logic           
+        if state == 3:
+            corners1, ids1 =  findArucoMarkers(frame, 4, 50)
+            corners2, ids2 = findArucoMarkers(frame, 5, 50)
+            try:
+                #this is for the center     
+                coordinates1 = centerloc2(frame, corners1, ids1)
+                #this is for the four corners
+                coordinates2 = cornerloc(frame, corners2, ids2)
+                state = fine_tune(coordinates1, coordinates2,frame)
+            except:
+                pass                
+        # Battery Mode 
         if state == 4:
             print("You are done for now")
             break
