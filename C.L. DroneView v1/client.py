@@ -14,6 +14,7 @@ import tkinter as tk
 
 # Custom Dependencies
 from arucodetect import *
+from bytefunc import *
 
 # Global Variables
 isFrameBtnPressed = False
@@ -67,8 +68,18 @@ def tkinter():
         isFrameBtnPressed = True
 
     def propmove():
-        s.send(bytes('y', 'utf-8'))
-        print("Drone Props Moved!")
+        s.send(state('panic'))
+        '''
+        ### Examples of using the bytefunc.py dependency for drone movement ###
+        s.send(move_x('+'))
+        s.send(move_x('-'))
+        s.send(move_y('+'))
+        s.send(move_y('-'))
+        s.send(move_z('+'))
+        s.send(move_z('-'))
+        s.send(state('panic'))
+        s.send(state('lock'))
+        '''
 
     # BUTTON DECLARATIONS
     # Frame Button
