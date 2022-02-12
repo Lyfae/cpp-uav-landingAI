@@ -59,7 +59,7 @@ def tkinter():
     frame_label = tk.Label(main_canv, text="Open/Close\nDrone Camera", font=('courier new',14), justify='center', bg=BGCOLOR, fg=SUBTITLECOLOR)
     frame_label.place(relx=0.3,rely=0.625,anchor='center')
 
-    move_label = tk.Label(main_canv, text="Toggle Panic\nMode On/Off", font=('courier new',14), justify='center', bg=BGCOLOR, fg=SUBTITLECOLOR)
+    move_label = tk.Label(main_canv, text="Toggle Panic\nMode On/Off", font=('courier new',14), justify='center', bg=BGCOLOR, fg='red')
     move_label.place(relx=0.7,rely=0.625,anchor='center')
 
     # BUTTON FUNCTIONS

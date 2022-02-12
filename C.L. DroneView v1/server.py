@@ -29,6 +29,8 @@ def datarecv_client(conn, nano):
                 nano.flush()
         except Exception as e:
             print(f"Error: {e}. Could not send data into arduino")
+            conn.close()
+            break
             
 # [THREAD] Code for the pi to receive data from the nano
 def datarecv_nano(conn, nano):
@@ -46,6 +48,9 @@ def datarecv_nano(conn, nano):
                 print(mainlist)
             except:
                 print(f"Letters detected: {data}")
+        if not conn:
+            conn.close()
+            break
 
 # [THREAD] Takes camera feed and throws it into the socket between client-server
 def servproc(conn, addr):
@@ -66,6 +71,9 @@ def servproc(conn, addr):
                 key = cv2.waitKey(1) & 0xFF
                 if key == ord('q'):
                     conn.close()
+        else:
+            conn.close()
+            break
 
 # [MAIN] Main function, where everything happens
 def main():
@@ -83,24 +91,31 @@ def main():
     s.settimeout(TIME_OUT) 
     print("Listening on %s:%s..." % (HOST, str(PORT)))
 
-    # Server Activation
-    conn,addr = s.accept()
-    print('GOT CONNECTION FROM:',addr)
-
     # Setup Serial Connection
     RFreceiver = serial.Serial("/dev/ttyUSB0", 9600) # Data coming into pi at 9600 baud
 
-    # Thread it (Send camera data to client)
-    thread_server = threading.Thread(target = servproc, args = (conn, addr))
-    thread_server.start()
+    while True:
+        try:
+            # Server Activation
+            conn,addr = s.accept()
+            print('GOT CONNECTION FROM:',addr)
 
-    # Thread it again (Receive manual controller data from nano)
-    thread_RF = threading.Thread(target = datarecv_nano, args = (conn, RFreceiver))
-    thread_RF.start()
+            # Thread it (Send camera data to client)
+            thread_server = threading.Thread(target = servproc, args = (conn, addr))
+            thread_server.start()
 
-    # Thread it again again (Recieve autonomous client data, send to nano for drone control)
-    thread_client = threading.Thread(target = datarecv_client, args = (conn, RFreceiver))
-    thread_client.start()
+            # Thread it again (Receive manual controller data from nano)
+            thread_RF = threading.Thread(target = datarecv_nano, args = (conn, RFreceiver))
+            thread_RF.start()
+
+            # Thread it again again (Recieve autonomous client data, send to nano for drone control)
+            thread_client = threading.Thread(target = datarecv_client, args = (conn, RFreceiver))
+            thread_client.start()
+        except KeyboardInterrupt:
+            print("I'm outta here Ctrl+C")
+            break
+        except:
+            print("No Server!")
 
 if __name__ == "__main__":
     main()
