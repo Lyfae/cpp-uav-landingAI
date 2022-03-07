@@ -7,14 +7,15 @@ import imutils
 
 #create the socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_name = socket.gethostname()
-host_ip = socket.gethostbyname(host_name)
+# host_name = socket.gethostname()
+# host_ip = socket.gethostbyname(host_name)
+host_ip = '192.168.1.12'
 
 #connection output status
 print("Host IP:", host_ip)
 
 #set port and socket
-port = 9999
+port = 5000
 socket_address = (host_ip,port)
 
 #binding the socket
