@@ -7,8 +7,8 @@ import imutils
 
 #create the socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_name = socket.gethostname()
-host_ip = socket.gethostbyname(host_name)
+#host_name = socket.gethostname()
+host_ip = 'localhost'
 
 #connection output status
 print("Host IP:", host_ip)
