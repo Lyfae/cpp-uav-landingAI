@@ -17,6 +17,7 @@ port = 9999
 
 #connection
 client_socket.connect((host_ip,port)) # this value is a tuple
+print("Connection Success")
 data = b""
 #Q unsigned long int that takes 8 bytes
 payload_size = struct.calcsize("Q") #set as string
